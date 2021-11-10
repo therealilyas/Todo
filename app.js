@@ -1,54 +1,22 @@
-const App = {
-    data() {
-        return {
-            placeholderString: 'Type something',
-            title: 'Todo',
-            inputValue: '',
-            notes: ['Todo 1', 'Todo 2']
-        }
-    },
+Vue.createApp({
+    data: () => ({
+        myHtml: '<h1>Todo</h1>',
+        items: []
+    }),
     methods: {
-        inputChangeHandler(event) {
-            this.inputValue = event.target.value
-        },
-        addNewNote() {
-            if (this.inputValue !== '') {
-                this.notes.push(this.inputValue);
-                this.inputValue = '';
-            }
+        addItem() {
+            if (this.$refs.myInput.value != '') {
 
-
-        },
-        inputKeyPress(event) {
-            if (event.key === 'Enter') {
-                this.addNewNote()
+                this.items.unshift(this.$refs.myInput.value)
+                this.$refs.myInput.value = ''
+            } else {
+                return
             }
-        },
-        doubleCount() {
-            console.log('doubleCount')
-            return this.notes.length * 2
-        },
-        toUpperCase(item) {
-            return item.toUpperCase()
-        },
-        removeNote(i) {
-            this.notes.splice(i, 1)
         }
     },
     computed: {
-        doubleCountComputed() {
-            console.log('doubleCount')
-            return this.notes.length * 2;
-        },
-    },
-    watch: {
-        inputValue(value) {
-            if (value.length > 10) {
-                this.inputValue = ' '
-            }
+        evenItems() {
+            return this.items.filter(i => i % 2 === 0)
         }
     }
-}
-
-
-Vue.createApp(App).mount('#app');
+}).mount("#app")
