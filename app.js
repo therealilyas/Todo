@@ -2,7 +2,7 @@ const App = {
     data() {
         return {
             placeholderString: 'Type something',
-            title: 'Counter',
+            title: 'Todo',
             inputValue: '',
             notes: ['Todo 1', 'Todo 2']
         }
